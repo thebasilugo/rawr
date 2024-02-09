@@ -1,0 +1,199 @@
+:root {
+  --dark-color: rgb(187, 187, 187);
+  --present-box: rgb(240, 58, 58);
+  --present-lid: rgb(216, 52, 52);
+  --ribbon-dim:  rgba(235, 199, 0, 0.6);
+  --ribbon-bright:  rgba(235, 199, 0, 0.8);
+  --shadow: rgba(0, 0, 0, 0.1);
+  --info: rgb(255, 255, 255);
+}
+
+body {
+  background: var(--dark-color);
+}
+
+.container {
+  width: 100%;
+margin-top: 100px;
+}
+
+.present {
+  width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  display: none;
+}
+
+span {
+  transition: all 0.5s ease-in-out;
+}
+
+.present:hover span{
+  background: var(--ribbon-bright);
+}
+
+.lid, .box {
+  background: 
+  radial-gradient(white 15%, transparent 15.1%),
+  var(--present-box);
+  background-position: 0 0, 25px 25px;
+  background-size: 45px 45px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.lid {
+  width: 400px;
+  height: 70px;
+  box-shadow: 1px 2px 3px var(--shadow);
+  z-index: 1;
+  padding: 0 2px;
+  background-color: var(--present-lid);
+  top: 0;
+  left: 0;
+  transition: all ease-in-out 0.4s;
+}
+
+.box {
+  width: 400px;
+  height: 250px;
+  top: -3px;
+}
+
+.lid span, .box span {
+  position: absolute;
+  display: block;
+  background-color: var(--ribbon-dim);
+  box-shadow: 1px 2px 3px var(--shadow);
+}
+
+.box span:first-child, .lid span{
+  height: 100%;
+  width: 60px;
+  left: 175px;
+}
+
+.box span:last-child{
+  height: 60px;
+  width: 100%;
+  top: 105px;
+}
+
+.info {
+  color: var(--info);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  position: relative;
+  top: 10px;
+  height: 0;
+  transition: all ease-out 0.5s;
+}
+
+.info p, 
+.info h2 {
+  margin: 0;
+}
+
+.info p {
+  font-size: 24px;
+}
+
+.info h2 {
+  font-size: 40px;
+}
+
+.present:hover .lid {
+  top: -120px;
+  transform: rotateZ(10deg);
+  left: 10px;
+}
+
+.present:hover .info {
+  top: -100px;
+}
+
+@media only screen and (max-width: 520px) {
+  /* for small screens */
+  .container {
+    width: 350px;
+    margin: 0 auto;
+    margin-top: 70px;
+  } 
+
+  .present {
+    width: 300px;
+  }
+  
+  .lid, .box {
+    background-size: 25px 25px;
+  }
+  
+  .lid {
+    width: 300px;
+    height: 70px;
+  }
+  
+  .box {
+    width: 300px;
+    height: 200px;
+    transition: all ease-in-out 0.4s;
+  }
+  
+  .box span:first-child, .lid span{
+    height: 100%;
+    width: 50px;
+    left: 125px;
+  }
+  
+  .box span:last-child{
+    height: 50px;
+    width: 100%;
+    top: 50px;
+  }
+  
+  .info p {
+    font-size: 20px;
+    visibility: visible;
+  }
+  
+  .info h2 {
+    font-size: 22px;
+    visibility: visible;
+  }
+  
+  .present:hover .lid {
+    top: 0px;
+    transform: rotateZ(0deg);
+    left: 0px;
+  }
+
+  .present:hover .box {
+    top: 0px;
+  }
+
+  .present:hover span{
+    background: var(--ribbon-dim);
+  }
+
+  .present.open span {
+    background: var(--ribbon-bright);
+  }
+  
+  .present:hover .info {
+    top: 0px;
+  }
+
+  .present.open .lid{
+    top: -80px;
+    transform: rotateZ(10deg);
+    left: 10px;
+  }
+
+  .present.open .box {
+    top: 10px;
+  }
+  
+  .present.open .info {
+    top: -60px;
+  }
+}
