@@ -69,6 +69,6 @@ function showLastPart () {
 // calling them
 setTimeout(multiTextType1, 1000);
 setTimeout(multiTextType2, 4000);
-setTimeout(showPresent, 30000);
-setTimeout(showLastPart, 34000);
+setTimeout(showPresent, 35000);
+setTimeout(showLastPart, 45000);
 
