@@ -12,6 +12,10 @@ body {
 	color: rgb(255, 255, 255);
 }
 
+body.transparent {
+opacity: 0;
+}
+
 	.container-fluid {
 		padding: 40px;
 		text-align: justify;
