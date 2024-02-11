@@ -12,8 +12,9 @@ body {
 	color: rgb(255, 255, 255);
 }
 
-.transparent {
-opacity: 0;
+main .deactiv {
+text-align: center;
+	padding: 20px;
 }
 
 	.container-fluid {
