@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>hey you</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+	</head>
+	<body
+		class="bg-pink-100 flex flex-col items-center min-h-screen text-gray-800"
+	>
+		<div
+			class="container mx-auto my-10 p-6 bg-white rounded-lg shadow-lg max-w-lg text-center"
+		>
+			<form id="redirect-form" class="space-y-6">
+				<p id="title" class="text-2xl font-semibold text-pink-700">
+					Detective Brunch requires that you;
+				</p>
+				<div>
+					<label for="name" class="block text-sm font-medium text-gray-700"
+						>Enter your name (preferably a nickname):</label
+					>
+					<input
+						type="text"
+						id="name"
+						name="name"
+						placeholder="e.g., thebasilugo"
+						required
+						class="mt-1 p-2 w-full border rounded focus:outline-none focus:ring-2 focus:ring-pink-300"
+					/>
+				</div>
+				<div>
+					<label for="date" class="block text-sm font-medium text-gray-700"
+						>Enter your date of birth (d.o.b.):</label
+					>
+					<input
+						type="date"
+						id="date"
+						name="date"
+						required
+						class="mt-1 p-2 w-full border rounded focus:outline-none focus:ring-2 focus:ring-pink-300"
+					/>
+				</div>
+				<button
+					type="button"
+					id="submit-btn"
+					class="w-full py-2 bg-pink-600 text-white font-bold rounded hover:bg-pink-500"
+				>
+					Submit
+				</button>
+				<p id="description" class="text-sm text-gray-500 mt-4">
+					Disclaimer: The redirect could differ based on your inputs, as this
+					was tailored for a particular <em>special</em> user. There's only one
+					different redirect. You'll know if you get it right.
+				</p>
+			</form>
+		</div>
+
+		<div
+			class="hidden wrong-entry container mx-auto my-10 p-6 bg-white rounded-lg shadow-lg max-w-lg text-center text-pink-700"
+		>
+			<p>Wrong entry, please try again</p>
+		</div>
+
+		<script>
+			const nameEl = document.querySelector("#name");
+			const dateEl = document.querySelector("#date");
+			const submitBtn = document.querySelector("#submit-btn");
+
+			function checkInput() {
+				const nameElLowercase = nameEl.value.trim().toLowerCase();
+				const dateVal = dateEl.value;
+
+				if (nameElLowercase === "werewolf" && dateVal === "2006-02-09") {
+					window.location.href = "msg.html";
+				} else {
+					document.querySelector(".wrong-entry").classList.remove("hidden");
+				}
+			}
+
+			submitBtn.addEventListener("click", checkInput);
+		</script>
+	</body>
+</html>
