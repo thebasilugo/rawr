@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Special Message</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<style>
+			.fade-in {
+				opacity: 0;
+				transform: translateY(10px);
+				animation: fadeIn 2s forwards ease-in;
+			}
+			@keyframes fadeIn {
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+			.section-title {
+				font-size: 1.5rem;
+				font-weight: bold;
+				color: #d6336c;
+			}
+			.cute-note {
+				background-color: #ffe4e9;
+				padding: 0.5rem 1rem;
+				margin: 0.5rem 0;
+				border-radius: 8px;
+				font-size: 0.9rem;
+				color: #d6336c;
+				opacity: 0;
+				animation: fadeIn 2s forwards ease-in;
+			}
+			.image-placeholder {
+				width: 100%;
+				height: 200px;
+				background-color: #f7b7c3;
+				border-radius: 8px;
+				margin: 0.5rem 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #d6336c;
+				font-size: 1.1rem;
+				font-weight: bold;
+				opacity: 0;
+				animation: fadeIn 2s forwards ease-in;
+			}
+		</style>
+		<script>
+			// Redirect to index page if accessed directly
+			if (document.referrer === "") {
+				window.location.href = "index.html";
+			}
+		</script>
+	</head>
+	<body
+		class="bg-pink-100 text-gray-900 flex flex-col items-center justify-center min-h-screen p-4"
+	>
+		<div
+			class="container max-w-lg p-6 rounded-lg bg-white shadow-lg space-y-8 text-center"
+		>
+			<!-- Main message section with fade-in effect -->
+			<div id="message-section" class="fade-in space-y-4">
+				<p class="text-xl font-semibold text-pink-700">Hey Joy,</p>
+				<!-- <p class="text-base text-gray-800">
+					bayo's weirdo, windshield warrior, homeless queen, mama, baby girl,
+					best friend, christian sister, Mary's friend, forehead french fries,
+					bayo's babe, bayo's baby girl, obsessed over me person, my no1 fan,
+					bayo's little weirdo, witch.
+				</p> -->
+				<p class="text-base text-gray-800">
+					I hope you're doing awesome, as always. I miss you and I hope you're
+					okay.
+				</p>
+				<!-- <p class="text-xl font-semibold text-pink-700 mt-4">
+					Happy Birthday, baby girl!
+				</p> -->
+			</div>
+
+			<!-- Cute notes section -->
+			<div id="cute-notes-section" class="space-y-4">
+				<p class="section-title fade-in" style="animation-delay: 2s">
+					Things I Love About You
+				</p>
+				<div class="cute-note" style="animation-delay: 2.5s">
+					Your laugh that lights up the room
+				</div>
+				<div class="cute-note" style="animation-delay: 3s">
+					Your goofy side that matches mine
+				</div>
+				<div class="cute-note" style="animation-delay: 3.5s">
+					Your tote bag (with the cute butterfly)
+				</div>
+				<div class="cute-note" style="animation-delay: 4s">
+					The way you love your friends and family
+				</div>
+				<div class="cute-note" style="animation-delay: 4.5s">
+					Your huge heart
+				</div>
+			</div>
+
+			<!-- Image placeholder section for personal photos -->
+			<!-- <div class="space-y-4">
+				<p class="section-title fade-in" style="animation-delay: 5s">
+					A Few Memories
+				</p>
+				<div class="image-placeholder" style="animation-delay: 5.5s">
+					Image Placeholder 1
+				</div>
+				<div class="image-placeholder" style="animation-delay: 6s">
+					Image Placeholder 2
+				</div>
+				<div class="image-placeholder" style="animation-delay: 6.5s">
+					Image Placeholder 3
+				</div>
+			</div> -->
+
+			<!-- Final section with a prayer -->
+			<div id="prayer-section" class="fade-in" style="animation-delay: 7s">
+				<p class="section-title">A Birthday Prayer Just for You</p>
+				<p class="text-gray-800">
+					May today be filled with love, joy, and all the laughter that you
+					bring into this world. May you always find happiness in the little
+					things, and may you be blessed with love and peace in every season of
+					your life. <br />Happy Birthday, beautiful!
+				</p>
+			</div>
+
+			<!-- Evergreen Section (kept after birthday passes) -->
+			<div
+				id="evergreen-section"
+				class="fade-in space-y-4"
+				style="animation-delay: 8s"
+			>
+				<p class="section-title">Just Because</p>
+				<p class="text-gray-800">
+					I’m so grateful to have you in my life. You’re my best friend, my
+					rock, and my heart. No matter what, I’ll always be here for you. I
+					can’t wait to make more memories together.
+				</p>
+			</div>
+		</div>
+	</body>
+</html>
