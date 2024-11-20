@@ -16,31 +16,40 @@
 				<p id="title" class="text-2xl font-semibold text-pink-700">
 					Detective Brunch requires that you;
 				</p>
-				<div>
-					<label for="name" class="block text-sm font-medium text-gray-700"
-						>Enter your name (preferably a nickname):</label
-					>
+
+				<div class="relative">
 					<input
 						type="text"
 						id="name"
 						name="name"
-						placeholder="e.g., thebasilugo"
+						placeholder=" "
 						required
-						class="mt-1 p-2 w-full border rounded focus:outline-none focus:ring-2 focus:ring-pink-300"
+						class="peer mt-6 p-2 w-full border rounded focus:outline-none focus:ring-2 focus:ring-pink-300 text-gray-700"
 					/>
-				</div>
-				<div>
-					<label for="date" class="block text-sm font-medium text-gray-700"
-						>Enter your date of birth (d.o.b.):</label
+					<label
+						for="name"
+						class="absolute left-2 top-2 text-sm font-medium text-gray-700 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-1/2 peer-placeholder-shown:left-2 peer-focus:text-pink-600 peer-focus:text-xs peer-focus:top-0 transition-all"
 					>
+						Enter your name (preferably a nickname):
+					</label>
+				</div>
+
+				<div class="relative">
 					<input
 						type="date"
 						id="date"
 						name="date"
 						required
-						class="mt-1 p-2 w-full border rounded focus:outline-none focus:ring-2 focus:ring-pink-300"
+						class="-mb-8 mt-8 p-2 w-full border rounded focus:outline-none focus:ring-2 focus:ring-pink-300 text-gray-700"
 					/>
+					<label
+						for="date"
+						class="absolute left-2 top-2 text-sm font-medium text-gray-700 transition-all"
+					>
+						Enter your date of birth (d.o.b.):
+					</label>
 				</div>
+
 				<button
 					type="button"
 					id="submit-btn"
@@ -61,41 +70,43 @@
 		>
 			<p>Wrong entry, please try again</p>
 		</div>
+		<div
+			class="hidden hint container mx-auto my-10 p-6 bg-white rounded-lg shadow-lg max-w-lg text-center text-pink-700"
+		>
+			<p>Try your nickname bro. Rawr.</p>
+		</div>
 
 		<script>
 			const nameEl = document.querySelector("#name");
 			const dateEl = document.querySelector("#date");
 			const submitBtn = document.querySelector("#submit-btn");
 
-			// Function to check input and redirect
+			// Obfuscated values stored in local variables
+			const correctName = btoa("werewolf"); // Base64 encoding of the name
+			const correctDate = btoa("2006-02-09"); // Base64 encoding of the date
+			const realName = btoa("joy");
+
 			function checkInput() {
 				const nameElLowercase = nameEl.value.trim().toLowerCase();
 				const dateVal = dateEl.value;
 
-				if (nameElLowercase === "werewolf" && dateVal === "2006-02-09") {
+				// Decode the obfuscated values and compare
+				if (
+					btoa(nameElLowercase) === correctName &&
+					btoa(dateVal) === correctDate
+				) {
 					window.location.href = "msg.html";
+				} else if (
+					btoa(nameElLowercase) === realName &&
+					btoa(dateVal) === correctDate
+				) {
+					document.querySelector(".hint").classList.remove("hidden");
 				} else {
 					document.querySelector(".wrong-entry").classList.remove("hidden");
 				}
 			}
 
-			// Event listener for button click
 			submitBtn.addEventListener("click", checkInput);
-
-			// Event listener for "Enter" key press in the form fields
-			nameEl.addEventListener("keydown", (event) => {
-				if (event.key === "Enter") {
-					event.preventDefault(); // Prevent form submission if Enter is pressed
-					checkInput();
-				}
-			});
-
-			dateEl.addEventListener("keydown", (event) => {
-				if (event.key === "Enter") {
-					event.preventDefault(); // Prevent form submission if Enter is pressed
-					checkInput();
-				}
-			});
 		</script>
 	</body>
 </html>
