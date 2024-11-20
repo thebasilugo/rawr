@@ -67,6 +67,7 @@
 			const dateEl = document.querySelector("#date");
 			const submitBtn = document.querySelector("#submit-btn");
 
+			// Function to check input and redirect
 			function checkInput() {
 				const nameElLowercase = nameEl.value.trim().toLowerCase();
 				const dateVal = dateEl.value;
@@ -78,7 +79,23 @@
 				}
 			}
 
+			// Event listener for button click
 			submitBtn.addEventListener("click", checkInput);
+
+			// Event listener for "Enter" key press in the form fields
+			nameEl.addEventListener("keydown", (event) => {
+				if (event.key === "Enter") {
+					event.preventDefault(); // Prevent form submission if Enter is pressed
+					checkInput();
+				}
+			});
+
+			dateEl.addEventListener("keydown", (event) => {
+				if (event.key === "Enter") {
+					event.preventDefault(); // Prevent form submission if Enter is pressed
+					checkInput();
+				}
+			});
 		</script>
 	</body>
 </html>
