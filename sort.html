@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Reference Sorter</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+	</head>
+	<body class="bg-gray-50 min-h-screen flex flex-col items-center py-8">
+		<div class="w-full max-w-2xl bg-white shadow-md rounded-lg p-6">
+			<h1 class="text-2xl font-bold text-gray-800 mb-4 text-center">
+				Reference Sorter
+			</h1>
+			<p class="text-gray-600 mb-4 text-center">
+				References will be sorted alphabetically and displayed below:
+			</p>
+			<button
+				onclick="sortReferences()"
+				class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+			>
+				Sort References
+			</button>
+			<h2 class="text-xl font-semibold text-gray-800 mt-6">
+				Sorted References:
+			</h2>
+			<div
+				id="output"
+				class="mt-4 p-4 bg-gray-100 border border-gray-300 rounded-md text-gray-700 whitespace-pre-wrap"
+			>
+				Your sorted references will appear here...
+			</div>
+		</div>
+
+		<script>
+			/**
+			 * Reference array: Add your references here.
+			 */
+			const references = [
+				"Adeleye, A. O. & Department of History and International Studies, Ekiti State University, Ado Ekiti, Nigeria. (2023). Internal Displacement in Nigeria: Causes, Effects and Prevention. Budapest International Research and Critics Institute-Journal (BIRCI-Journal), No 2, 649–659. journal-article. Retrieved from https://www.bircu-journal.com/index.php/birci",
+				"Ezera, S. O., & Oghenede, M. E. (2021). Access to Education for Internally Displaced Children in IDP Camps in Nigeria. (Institute of Education, University of Benin, Nigeria), Benin Journal of Educational Studies (Vol. 27, pp. 215–225).",
+
+				"Omale, A., Abduljabbar, Dauda, S., & Department of Planning, Research and Statistics, National Commission for Colleges of Education, Garki, Abuja. (2022, December). EDUCATION IN EMERGENCIES AND NATIONAL DEVELOPEMENT: BRIDGING THE GAP IN EDUCATING INTERNALLY DISPLACED CHILDREN. Zamfara Journal of Politics and Development (Vol. Vol. 3).",
+
+				"Thom-otuya, B. E. N., Inko-tariah, D. C., Department of Political Science, Ignatius Ajuru University of Education, Port Harcourt, Nigeria, & Department of Educational Psychology, Guidance and Counseling, Ignatius Ajuru University of Education, Port Harcourt, Nigeria. (2016). Quality education for national development: The Nigerian experience. African Educational Research Journal, 4–3, 101–108. Retrieved from https://www.netjournals.org/pdf/AERJ/2016/3/16-032.pdf",
+
+				"Usman, Y. D., & Chinyere, M. G. (2021). Quality Assurance in Nigeria’s Education System: Prospect and Challenges. EduLine Journal of Education and Learning Innovation, 1(2), 76–83. https://doi.org/10.35877/454ri.eduline422",
+
+				"Abubakar Abdulrasheed and Peter Emmanuel. (n.d.). Retrieved from https://campusreporter.africa/author/abubakar-abdulrasheed-and-peter-emmanuel/",
+
+				"Adeleye, A. O. (2023, April 3). Internal Displacement in Nigeria: Causes, Effects and Prevention. Retrieved from https://www.bircu-journal.com/index.php/birci/article/view/7531/pdf",
+
+				"Akinniyi, A. J., Erinsakin, O. A., Emma-Ayire, S. O., & Rufus Giwa Polytechnic, Ondo State, Nigeria. (2021). CORRUPTION IN THE NIGERIAN EDUCATION SECTOR: CAUSES AND REMEDIES. KIU Interdisciplinary Journal of Humanities and Social Sciences (Vols. 2–2, pp. 1–13). Retrieved from https://kijhus.kiu.ac.ug/assets/articles/1631085133_corruption-in-the-nigerian-education-sector-causes-and-remedies.pdf",
+
+				"Edema, G. (2024, June 14). Poor infrastructure major challenge in schools — Daniel, Sanwo-Olu. Retrieved from https://punchng.com/poor-infrastructure-major-challenge-in-schools-daniel-sanwo-olu/",
+				"Ekundayo, T., Ayodele, O. V., & Ogunlade, T. (2020). QUALITY EDUCATION FOR THE INTERNALLY DISPLACED PERSONS IN NIGERIA: IMPLICATIONS FOR EDUCATIONAL MANAGERS. (Department of Educational Management Ekiti State University, Ado- Ekiti, Department of Educational Management Ekiti State University, Ado- Ekiti, & Department of Educational Management Ekiti State University, Ado-Ekiti), International Journal of Educational Foundations and Management (Vol. 14, pp. 136–138). Retrieved from https://www.ijefam.com/vol%2014_1_2020/QUALITY%20EDUCATION%20FOR%20THE%20INTERNALLY%20DISPLACED%20PERSONS%20IN%20NIGERIA%20IMPLICATIONS%20FOR%20EDUCATIONAL%20MANAGERS.pdf",
+
+				"Friday, C. (2023, April 11). The state of education in Nigeria: Challenges and opportunities. Retrieved from https://www.linkedin.com/pulse/state-education-nigeria-challenges-opportunities-chinedu-friday/",
+
+				"Godfrey, R. D., & Tafida, M. A. (2022). Determining the Causes of Internally Displaced Persons (IDPS) and Counselling for Social and Psychological Adjustment in Plateau State, Nigeria. Kashere Journal of Education, 3(1), 75–81. https://doi.org/10.4314/kje.v3i1.11",
+
+				"Haruna, A. (2022, January 28). Borno IDPs Worry Over Their Childrens’ Education In Camps. Retrieved from https://humanglemedia.com/borno-idps-worry-over-their-childrens-education-in-camps/",
+
+				"Ibrahim, Z. B. (2022, November 18). More Than A Million Displaced Children In Nigeria Are Not In School. Retrieved from https://humanglemedia.com/more-than-a-million-displaced-children-in-nigeria-are-not-in-school/",
+
+				"Idoko, C. (2024, April 1). Teacher shortage in primary schools hits 194,876 — NUT. Retrieved from https://tribuneonlineng.com/teacher-shortage-in-primary-schools-hits-194876-nut/ Internal displacement. (2024, November 11). Retrieved from https://www.unocha.org/internal-displacement",
+
+				"Internally displaced children in Nigeria need more protection from the state - Nigeria. (2021, October 19). Retrieved from https://reliefweb.int/report/nigeria/internally-displaced-children-nigeria-need-more-protection-state",
+
+				"Kim, B., Buffalo Shuford, Sheri Howard, Daniele Facundo, Roy Jackson, Jessica Karp, . . . Amanda Thrower. (n.d.). Social constructivism. In M. Orey (Ed.), Emerging perspectives on learning, teaching, and technology. Retrieved from http://relectionandpractice.pbworks.com/f/Social+Constructivism.pdf",
+
+				"Luise, O. E. (2023, March 31). The Quality of Educational Development in Nigeria. Retrieved from https://www.interesjournals.org/articles/the-quality-of-educational-development-in-nigeria-96573.html",
+
+				"Nigeria. (n.d.). Retrieved from https://www.internal-displacement.org/countries/nigeria/ Nigeria — North-Central and North-West — Round 14 IDP Atlas (June 2024) | Displacement Tracking Matrix. (2024, April 29). Retrieved from https://dtm.iom.int/reports/nigeria-north-central-and-north-west-round-14-idp-atlas-june-2024",
+
+				"Nigeria, G. (2024, January 9). Education: A critical examination of poor infrastructure. Retrieved from https://guardian.ng/opinion/education-a-critical-examination-of-poor-infrastructure/",
+
+				"NIGERIAN EDUCATION CONUNDRUM: THE QUALITY GAP – igetafrica.org. (n.d.). Retrieved from https://www.igetafrica.org/nigerian-education-conundrum-the-quality-gap/",
+
+				"Ogwo, C. (2024, October 18). Learning crisis persist as teachers shortage worsens in Nigeria - Businessday NG. Retrieved from https://businessday.ng/bd-weekender/article/learning-crisis-persist-as-teachers-shortage-worsens-in-nigeria/",
+
+				"Sanusi, A. W., Maishanu, A. M., Muhammad, J., Department of Social Studies, Shehu Shagari College of Education (SSCOE), Sokoto State, Nigeria, & Department of Integrated Science, Shehu Shagari College of Education (SSCOE), Sokoto State, Nigeria. (2019). An Assessment of Some Factors Militating Against Quality Education Transformation Agenda in Nigeria. International Journal of Research and Innovation in Social Science (IJRISS), Volume III(Issue X), 135. Research Article. Retrieved from https://rsisinternational.org/journals/ijriss/Digital-Library/volume-3-issue-10/135-140.pdf",
+
+				"Scholar, N. (2024, August 23). Addressing Shortage of Qualified Teachers. Retrieved from https://disciplines.ng/addressing-shortage-of-qualified-teachers/",
+
+				"University Library, University of Southampton. (2023, May 1). Quality basic education provision for internally displaced children in internally displaced persons’ camps. A case study of some camps in Northcentral and Northeast of Nigeria.  - ePrints Soton. Retrieved from https://eprints.soton.ac.uk/477009/",
+
+				"Guiding Principles (2003) United nations guiding principles on internal displacement. EKN.NewYork.",
+
+				"Kukla, A. (2000). Social Constructivism and the Philosophy of Science. New York:",
+
+				"Routledge",
+
+				"Nawaz,  A.  (2012).  Social-constructivism:  Futuristic  sphere  for eLearning  in  HEIs.  Global  Journal  of  Management  and  Business Research, 12(8).",
+				"Mohammed, S. H., & Kinyo, L. (2020). The Role of Constructivism in the  Enhancement  of  Social  Studies  Education.  Journal  of  critical reviews, 7(7), 249-256.",
+				"Kennedy,  J.  (2014).  Characteristics  of  massive  open  online  courses (MOOCs): A research review, 2009-2012. Journal of Interactive Online Learning, 13(1).",
+				"Aljohani, M. (2017). Principles of 'constructivism' in foreign language teaching. Journal of Literature and Art Studies, 7(1), 97-107",
+				"Al-Qaysi,  N.,  Mohamad-Nordin,  N.,  &  Al-Emran,  M.  (2021). Developing an Educational Framework for Using WhatsApp Based on Social  Constructivism  Theory.  In  Recent  Advances  in  Intelligent Systems and Smart Applications (pp. 243-252). Springer, Cham",
+				"Kutay,  C.,  Howard-Wagner,  D.,  Riley,  L.,  &  Mooney,  J.  (2012, September). Teaching culture as social constructivism. In International Conference  on  Web-Based  Learning  (pp.  61-68).  Springer,  Berlin, Heidelberg",
+				"Rannikmäe,  M.,  Holbrook,  J.,  &  Soobard,  R.  (2020).  Social Constructivism—Jerome  Bruner.  In Science Education in Theory  and Practice (pp. 259-275). Springer, Cham.",
+				"Ernest, P. (March 23, 1999). Social Constructivism as a Philosophy of Mathematics: Radical Constructivism",
+				"Gredler, M. E. (1997). Learning and instruction: Theory into practice (3rd ed).",
+				"Upper Saddle River, NJ: Prentice-Hall.",
+				"Prawat, R. S., & Floden, R. E. (1994). Philosophical Perspectives on Constructivist",
+				"Views of Learning. Educational Psychologist, 29(1), 37-48.",
+
+				"Kushi, G. (2018) “Plight of Internally Displaced Persons (IDPs)” Leadership,",
+				"Osadola, O. S. (2012). A historical analysis of ethnic conflict in Nigeria. Research Paper",
+				"(Postgraduate).",
+				"Okon, E. O. (2018). Internally displaced persons in Nigeria: Review of empirical studies.",
+				"American International Journal of Social Science Research, 2(1), 28-38.",
+				"Adeleye, O. A., & Osadola, O. S. (2022). International Aid in Managing IDPs: The Case of",
+				"United Nations in Nigeria. SIASAT, 7(3), 235-246.",
+				"Nemine, E.B. & Zalakro, J. l. (2019). Educating children in internally displaced Persons (IDPs) Camps through Blended Learning: Prospects and Challenges. International JournalofEducation,LearningandDevelopment,7(4),152-164.",
+				"Obashoro-John, O. A. & Oni, G. J. (2017). Refugee education: The state of Nigeria's preparedness.UniversalJournalofEducationalResearch5(6),989-994",
+				"International Committee of the Red Cross (2020). Access to education. https://www.icrc.org/en/what-we-do/access-education",
+				"Mohammed, F.K. (2017). The causes and consequences of internal displacement in Nigeria and related governance challenges. Working paper division global issues. Stiftung Wissenschaft und Politik German institute for international and security affairs.Ludwigkirchplatz3−4D-10719Berlin.",
+				"Magaji, T. (2023). The Implications of Non- Domestication of Kampala Convention to the Protection of the Internally Displaced Persons (IDPs) in Nigeria. Wukari International Studies Journal, 7(3), 427- 447.",
+				"Oghuvbu, E. A., &Okolie, U. C. (2020). Responsibility to protect and the challenges of displaced men in Nigeria. Journal of Danubian Studies and Research, 10(1).",
+				"Kemei, B., Ochomo, E., Ombok, M., Midega, J., Lucas, E. R., Donnelly, M. J., ... & McDermott, D. P. (2023). Spatially explicit sampling frameworks to identify regions of increased mosquito abundance. bioRxiv, 2023-11.",
+				"Khai, T. S. (2023). Vulnerability and social determinants of health among internally displaced persons (IDPs) in Myanmar post- military coup.",
+				"Internal Displacement Monitoring Centre (IDMC) (2023). 2023 Global Report on Internal Displacement: Internal displacement and food security. Retrieved from: https://api.internal- displacement.org/sites/default/files/publi cations/documents/IDMC_GRID_2023_Gl obal_Report_on_Internal_Displacement_ LR.pdf",
+				"Internal Displacement Monitoring Centre (IDMC) (2024). Global Report on Internal Displacement. Retrieved from: https://api.internal- displacement.org/sites/default/files/publi cations/documents/IDMC-GRID-2024- Global-Report-on-Internal- Displacement.pdf",
+				"Mohammed, 2017 F.K. Mohammed The Causes and Consequences of Internal Displacement in Nigeria and Related Governance Challenges SWP, Berlin (2017)",
+				"https://www.swp berlin.org/publications/products/arbeitspapiere/Mohammed_2017_Internal_Displacement_Nigeria.pdf",
+				"F.O. Olanrewaju, A. Olanrewaju, F. Omotoso, et al.",
+				"Insurgency and the Invisible Displaced Population in Nigeria: A Situational Analysis, 9, SAGE Open (2019)",
+				"United Nations Office for the Coordination of Humanitarian Affairs (UNOCHA), 2016",
+				"United Nations Office for the Coordination of Humanitarian Affairs (UNOCHA). Nigeria: humanitarian needs overview 2017. 2016. https://www.humanitarianresponse.info/en/programme-cycle/space/document/nigeria-humanitarian-needs-overview-2017 (Accessed January 23, 2022).",
+				"NiM et al., 2018",
+				"G. NiM, S.M. Afandi, A.A. Ahmad, S. Jamil",
+				"Forced displacement and the plight of internally displaced persons in Northeast Nigeria",
+				"Hum. Soc. Sci. Res., 1 (2018), pp. 46-52",
+				"Oluwasanmi et al., 2017",
+				"O.I. Oluwasanmi, O.I. Eme, R. Aloh",
+				"Rehabilitation of IDPs in North East Nigeria: challenges and prospects",
+				"Socialscientia, 2 (2017), pp. 33-48",
+				"Obiefuna and Adams, 2021",
+				"B.A.C. Obiefuna, P.A. Adams",
+				"The plights of female internally displaced persons (IDPs) in Borno state: The response Christian Association of Nigeria (CAN)",
+				"IGWEBUIKE Afr. J Arts Humanit., 7 (1) (2021), 10.13140/RG.2.2.19482.59846",
+				"https://acjol.org/index.php/iaajah/article/view/1026/994",
+				"ISSN: 2488- 9210 (Print) 2504-9038 (Online)",
+				"Ibrahim, 2019",
+				"S.G. Ibrahim",
+				"The plight of internally displaced persons in unofficial camps in the Federal Capital Territory of Nigeria, Abuja. Afr",
+				"J Soc. Sci. Humanit. Res., 2 (2019), pp. 28-37",
+			];
+
+			/**
+			 * Sorts the references alphabetically and displays them.
+			 */
+			function sortReferences() {
+				// Sort the references alphabetically
+				const sortedReferences = references.sort((a, b) => a.localeCompare(b));
+
+				// Format the sorted references with line breaks and spacing
+				const formattedReferences = sortedReferences
+					.map((ref) => `${ref}\n\n`)
+					.join("");
+
+				// Display the sorted references in the output div
+				document.getElementById("output").textContent = formattedReferences;
+			}
+		</script>
+	</body>
+</html>
