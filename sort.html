@@ -162,6 +162,11 @@
 				// Display the sorted references in the output div
 				document.getElementById("output").textContent = formattedReferences;
 			}
+
+			function toggleSummary() {
+				const summary = document.getElementById("task-summary");
+				summary.classList.toggle("hidden");
+			}
 		</script>
 	</body>
 </html>
