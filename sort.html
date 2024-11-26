@@ -11,6 +11,46 @@
 		<!-- Task Status Section -->
 		<div class="w-full max-w-2xl bg-white shadow-md rounded-lg p-6">
 			<h1 class="text-2xl font-bold text-gray-800 mb-4 text-center">
+				Task Status Summary
+			</h1>
+			<!-- Button to toggle the summary section -->
+			<button
+				onclick="toggleSummary()"
+				class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 mb-4"
+			>
+				View Task Status Summary
+			</button>
+
+			<!-- Collapsible section for task status summary -->
+			<div id="task-summary" class="hidden">
+				<div class="mt-4">
+					<h2 class="text-xl font-semibold text-gray-800">Task Status:</h2>
+					<ul class="space-y-3 mt-4">
+						<!-- Task Status - Done -->
+						<li class="flex items-center">
+							<input type="checkbox" class="mr-2" disabled checked />
+							Sort References alphabetically: &nbsp;
+							<span class="text-green-600"> Completed</span>
+						</li>
+						<!-- Task Status - In Progress -->
+						<li class="flex items-center">
+							<input type="checkbox" class="mr-2" disabled checked />
+							Convert to APA 6th Edition Format: &nbsp;
+							<span class="text-green-600"> Completed</span>
+						</li>
+						<!-- Task Status - Undone -->
+						<li class="flex items-center">
+							<input type="checkbox" class="mr-2" disabled />
+							Tidying Up: &nbsp;<span class="text-red-500">Not Started</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- Reference Sorter Section -->
+		<div class="w-full max-w-2xl bg-white shadow-md rounded-lg p-6 mt-6">
+			<h1 class="text-2xl font-bold text-gray-800 mb-4 text-center">
 				Reference Sorter
 			</h1>
 			<p class="text-gray-600 mb-4 text-center">
